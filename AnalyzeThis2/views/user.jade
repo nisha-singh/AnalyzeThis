@@ -1,0 +1,23 @@
+﻿extends layout
+
+block content
+   br
+   p Hi #{user.name}, click on the button below to link your accounts
+   button(onclick="linkUsers()") Link
+   br   
+   script(src="https://cdn.auth0.com/w2/auth0-6.7.min.js")
+     
+   script.  
+      function linkUsers(){
+        console.log("you are in link users");
+        var user = !{JSON.stringify(user)};
+        $.ajax({
+            type: 'POST',
+            url: '/user/linkUsers',
+          }).then(function(data){
+            alert(data);
+            location.reload();
+          }).fail(function(jqXHR){
+            alert('Error linking Accounts: ' + jqXHR.status + " " + jqXHR.responseText);
+          });
+      }
